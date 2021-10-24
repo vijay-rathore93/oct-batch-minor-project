@@ -3,15 +3,97 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee Management</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 </head>
 <body>
-	<h1>Add Employee page</h1>
-	<form>
-		  <input type="radio" id="html" name="fav_language" value="HTML">
-		  <label for="html">HTML</label><br>   <input type="radio"
-			id="css" name="fav_language" value="CSS">   <label for="css">CSS</label><br>
-		  <input type="radio" id="javascript" name="fav_language"
-			value="JavaScript">   <label for="javascript">JavaScript</label>
-	</form>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Home
+				</a></li>
+			</ul>
+
+		</div>
+	</nav>
+
+	<br />
+	<div class="container">
+		<div class="card">
+			<div class="card-header">Add Employee Information</div>
+			<div class="card-body">
+
+
+
+
+
+
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group">
+								<label for="usr">Name:</label> <input type="text"
+									class="form-control" id="usr">
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Age</label> <input type="text" class="form-control"
+									id="age">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group">
+								<label>Salary</label> <input type="text" class="form-control"
+									id="salaryId">
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Department</label> <input type="text"
+									class="form-control" id="departmentId">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group">
+								<label>Contact</label> <input type="text" class="form-control"
+									id="contactId">
+							</div>
+						</div>
+						<div class="col-sm-5">
+
+
+							<label>Email</label> <input type="text" class="form-control"
+								id="emailId">
+
+
+
+						</div>
+					</div>
+				</div>
+
+
+
+
+			</div>
+			<div class="card-footer">
+				<button type="button" class="btn btn-primary" style="float: left"
+					onclick="saveEmployee()">Save Employee Data</button>
+				<button type="button" class="btn btn-primary" style="float: right"
+					onclick="onClickBack()">Back</button>
+			</div>
+		</div>
+
+
+	</div>
 </body>
 </html>
