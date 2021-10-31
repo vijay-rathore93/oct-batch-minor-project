@@ -7,8 +7,109 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.rtl.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.rtl.min.css" />
+<script
+	src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	function validateEmployeeInformation() {
+		var isValidated = true;
+		if ($("#usr").val() == '') {
+			$("#nameSpanId").show();
+			isValidated = false;
+		} else {
+			$("#nameSpanId").hide();
+			isValidated = true;
+		}
+		if ($("#departmentId").val() == '') {
+			$("#departmentSpanId").show();
+			isValidated = false;
+		} else {
+			$("#departmentSpanId").hide();
+			isValidated = true;
+		}
+		if ($("#contactId").val() == '') {
+			$("#contactSpanId").show();
+			isValidated = false;
+		} else {
+			$("#contactSpanId").hide();
+			isValidated = true;
+		}
+		if ($("#emailId").val() == '') {
+			$("#emailSpanId").show();
+			isValidated = false;
+		} else {
+			$("#emailSpanId").hide();
+			isValidated = true;
+		}
+		return isValidated;
+
+	}
+
+	function saveEmployeeInformation() {
+		if (validateEmployeeInformation()) {
+			var inputPayload = {
+				"name" : $("#usr").val(),
+				"department" : $("#departmentId").val(),
+				"age" : $("#age").val(),
+				"contact" : $("#contactId").val(),
+				"salary" : $("#salaryId").val(),
+				"email" : $("#emailId").val()
+			}
+			var inputPayloadString = JSON.stringify(inputPayload);
+			jQuery.ajax({
+				type : 'POST',
+				cache : true,
+				async : false,
+				contentType : 'application/json',
+				dataType : 'json',
+				url : location.origin + "/saveEmployee",
+				data : inputPayloadString,
+				success : function(data) {
+					clearAllFormData();
+					alertify.alert('Confirmation', 'Suceesfully Created!!',
+							function() {
+							});
+				}
+			});
+
+		}
+	}
+
+	function clearAllFormData() {
+		$("#usr").val("");
+		$("#departmentId").val("");
+		$("#contactId").val("");
+		$("#emailId").val("");
+		$("#salaryId").val("");
+	}
+
+	function hideAllErrorMessage() {
+		$("#nameSpanId").hide();
+		$("#departmentSpanId").hide();
+		$("#contactSpanId").hide();
+		$("#emailSpanId").hide();
+	}
+</script>
+
+
+
+
+
+
 </head>
-<body>
+<body onload="hideAllErrorMessage()">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
@@ -22,7 +123,10 @@
 	<br />
 	<div class="container">
 		<div class="card">
-			<div class="card-header">Add Employee Information</div>
+			<div class="card-header">
+				Add Employee Information<span style="float: right"><span
+					style="color: red">*</span>(Asterisk) Fields are mandatory</span>
+			</div>
 			<div class="card-body">
 
 
@@ -35,8 +139,9 @@
 					<div class="row">
 						<div class="col-sm-7">
 							<div class="form-group">
-								<label for="usr">Name:</label> <input type="text"
-									class="form-control" id="usr">
+								<label for="usr">Name<span style="color: red">*</span></label> <input
+									type="text" class="form-control" id="usr"> <span
+									class="text-danger" id="nameSpanId">Name is mandatory</span>
 							</div>
 						</div>
 						<div class="col-sm-5">
@@ -56,8 +161,10 @@
 						</div>
 						<div class="col-sm-5">
 							<div class="form-group">
-								<label>Department</label> <input type="text"
-									class="form-control" id="departmentId">
+								<label>Department<span style="color: red">*</span></label> <input
+									type="text" class="form-control" id="departmentId"> <span
+									class="text-danger" id="departmentSpanId">Department is
+									mandatory</span>
 							</div>
 						</div>
 					</div>
@@ -65,16 +172,18 @@
 					<div class="row">
 						<div class="col-sm-7">
 							<div class="form-group">
-								<label>Contact</label> <input type="text" class="form-control"
-									id="contactId">
+								<label>Contact<span style="color: red">*</span></label> <input
+									type="text" class="form-control" id="contactId"> <span
+									class="text-danger" id="contactSpanId">Contact is
+									mandatory</span>
 							</div>
 						</div>
 						<div class="col-sm-5">
 
 
-							<label>Email</label> <input type="text" class="form-control"
-								id="emailId">
-
+							<label>Email<span style="color: red">*</span></label> <input
+								type="text" class="form-control" id="emailId"> <span
+								class="text-danger" id="emailSpanId">Email is mandatory</span>
 
 
 						</div>
@@ -87,7 +196,7 @@
 			</div>
 			<div class="card-footer">
 				<button type="button" class="btn btn-primary" style="float: left"
-					onclick="saveEmployee()">Save Employee Data</button>
+					onclick="saveEmployeeInformation()">Save Employee Data</button>
 				<button type="button" class="btn btn-primary" style="float: right"
 					onclick="onClickBack()">Back</button>
 			</div>

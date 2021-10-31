@@ -33,7 +33,7 @@
 					async : false,
 					contentType : 'application/json',
 					dataType : 'json',
-					url : "http://localhost:9000/all",
+					url : location.origin + "/all",
 					success : function(data) {
 						$('#employeeTBLId')
 								.html(
@@ -227,7 +227,7 @@
 			</ul>
 			<form class="form-inline">
 				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
+					placeholder="Search" aria-label="Search" id="searchId">
 
 			</form>
 		</div>
