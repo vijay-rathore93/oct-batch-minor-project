@@ -46,8 +46,8 @@
 											"bFilter" : true,
 											"bInfo" : false,
 											"scrollCollapse" : true,
-											"paging" : false,
-											'iDisplayLength' : 6,
+											"paging" : true,
+											'iDisplayLength' : 3,
 											"dom" : 'lrtip',
 											"aoColumns" : [ {
 												"mDataProp" : "name",
@@ -146,20 +146,20 @@
 
 	function deleteEmployeeData() {
 		jQuery.ajax({
-			type : 'POST',
+			type : 'DELETE',
 			cache : true,
 			async : false,
 			contentType : 'application/json',
 			dataType : 'json',
-			url : "http://localhost:9009/employee/" + $("#hiddenId").val(),
+			url : location.origin + "/employee/" + $("#hiddenId").val(),
 			success : function(data) {
 				debugger;
 				$("#id01").modal('hide');
-				window.location.assign("http://localhost:9009/page")
+				window.location.assign(location.origin)
 			},
 			error : function(data) {
 				$("#id01").modal('hide');
-				window.location.assign("http://localhost:9009/page")
+				window.location.assign(location.origin);
 			}
 		});
 	}
@@ -173,7 +173,7 @@
 			async : false,
 			contentType : 'application/json',
 			dataType : 'json',
-			url : "http://localhost:9009/employee/" + empId,
+			url : location.origin + "/employee/" + empId,
 			success : function(data) {
 				$("#usr").val(data.name);
 				$("#age").val(data.age);
@@ -196,16 +196,15 @@
 			async : false,
 			contentType : 'application/json',
 			dataType : 'json',
-			url : "http://localhost:9009/updateEmployee/"
-					+ $("#hiddenId").val(),
+			url : location.origin + "/employee/" + $("#hiddenId").val(),
 			data : inputPayloadString,
 			success : function(data) {
 				$("#editInformation").modal('hide');
-				window.location.assign("http://localhost:9009/page")
+				window.location.assign(location.origin)
 			},
 			error : function(data) {
 				$("#editInformation").modal('hide');
-				window.location.assign("http://localhost:9009/page")
+				window.location.assign(location.origin);
 			}
 		});
 
@@ -236,6 +235,7 @@
 	<br />
 	<div class="container">
 		<h3>Employee Information</h3>
+		<input type="hidden" id="hiddenId" />
 		<div id="employeeTBLId"></div>
 	</div>
 

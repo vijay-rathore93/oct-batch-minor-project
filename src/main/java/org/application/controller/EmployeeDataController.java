@@ -40,11 +40,11 @@ public class EmployeeDataController {
 		return "Employee Deleted";
 	}
 
-	@PatchMapping("/employee/{empId}")
+	@PostMapping("/employee/{empId}")
 	public Employee updateEmployee(@PathVariable("empId") Integer empId, @RequestBody Employee employee) {
 		Employee employeeFound = employeeRepo.findById(empId).get();
-		employeeFound.setContact(employee.getContact());
-		employeeFound.setEmail(employee.getEmail());
+		employeeFound.setSalary(employee.getSalary());
+		employeeFound.setName(employee.getName());
 		employeeFound.setAge(employee.getAge());
 		return employeeRepo.save(employeeFound);
 	}
